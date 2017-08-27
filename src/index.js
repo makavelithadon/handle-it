@@ -37,7 +37,7 @@
         return;
       }
       handler.func.forEach(f => {
-        if (f.toString() === func.toString()) {
+        if (f.toString() === args[1].toString()) {
           events.splice(handlerIndex, 1);
           removeHandler.call(this, args[0], f);
         }
