@@ -22,6 +22,7 @@ import 'handle-it';
 
 #### with requiring minified script
 
+<div class="highlight highlight-text-html-basic">
 ```
 <!DOCTYPE html>
 <html>
@@ -34,6 +35,7 @@ import 'handle-it';
   </body>
 </html>
 ```
+</div>
 
 ## How to use
 
