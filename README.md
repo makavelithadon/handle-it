@@ -30,7 +30,7 @@ import 'handle-it';
     <title></title>
   </head>
   <body>
-    <script src="https://unpkg.com/handle-it@1.0.0"></script>
+    <script src="https://unpkg.com/handle-it"></script>
   </body>
 </html>
 ```
