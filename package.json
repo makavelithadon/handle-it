@@ -2,12 +2,11 @@
   "name": "handle-it",
   "version": "1.0.2",
   "description": "An event-handler module to easily handle events on elements",
-  "main": "src/index.js",
+  "main": "dist/index.min.js",
   "unpkg": "dist/index.min.js",
   "scripts": {
-    "babel": "babel ./src/index.js -o ./dist/index.min.js",
-    "uglify": "uglifyjs ./dist/index.min.js --compress --mangle -o ./dist/index.min.js",
-    "build": "npm run babel && npm run uglify",
+    "watch": "webpack --watch",
+    "build": "webpack -p",
     "prepublish": "npm run build"
   },
   "keywords": [],
@@ -15,7 +14,10 @@
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
     "babel-preset-es2015": "^6.24.1",
-    "uglify-js": "^3.0.28"
+    "uglify-js": "^3.0.28",
+    "webpack": "^3.10.0"
   }
 }
