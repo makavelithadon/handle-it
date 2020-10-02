@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button class="btn btn-say-hello">Say Hello</button>
+    <script type="module">
+      import { on, off } from "./../src/index.js";
+
+      const btn = document.querySelector(".btn.btn-say-hello");
+
+      const onClick = () => console.log("click.");
+      const onMouseDown = () => console.log("mousedown.");
+
+      on(btn, "click", onClick);
+      on(btn, "mousedown", onMouseDown);
+
+      window.setTimeout(() => off(btn), 5000);
+    </script>
+  </body>
+</html>

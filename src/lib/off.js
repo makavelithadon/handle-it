@@ -1,25 +1,57 @@
-const removeHandler = function removeHandler (...args) {
-  return ('removeEventListener' in this) ? this.removeEventListener(...args) : this.detachEvent(...args);
-};
+import { has, get, del, set } from "./utils.js";
 
-module.exports = function (events) {
-  return function off (...args) {
-    let handler = events.filter(handler => handler.el === this);
-    handler = handler.find(handler => handler.event === args[0]);
-    const handlerIndex = events.findIndex(h => h === handler);
-    if (typeof handler !== 'undefined') {
-      if (!args[1]) {
-        events.splice(handlerIndex, 1);
-        handler.func.forEach(f => removeHandler.call(this, args[0], f));
-      } else {
-        handler.func.forEach(f => {
-          if (f.toString() === args[1].toString()) {
-            events.splice(handlerIndex, 1);
-            removeHandler.call(this, args[0], f);
-          }
-        });
+function removeHandler(...args) {
+  "removeEventListener" in this
+    ? this.removeEventListener(...args)
+    : this.detachEvent(...args);
+  return args.pop();
+}
+
+function areEqualFns(fn1, fn2) {
+  return fn1 === fn2 || fn1.toString() === fn2.toString();
+}
+
+export default function off(events) {
+  return function off(el, event, cb) {
+    const clean = (map, el, event) => {
+      const mapEl = get(map, el);
+      if (mapEl) {
+        if (mapEl[event] && mapEl[event].filter(Boolean).length <= 0) {
+          delete mapEl[event];
+        }
+        if (Object.keys(mapEl).length <= 0) {
+          del(map, el);
+        }
       }
+    };
+    if (has(events, el)) {
+      const mapEl = get(events, el);
+      if (!event) {
+        Object.entries(mapEl).map(([e, arrayFns]) =>
+          arrayFns.map((fn) => removeHandler.call(el, e, fn))
+        );
+        del(events, el);
+        clean(events, el, event);
+        return events;
+      }
+      if (!cb) {
+        mapEl[event].map((fn) => removeHandler.call(el, event, fn));
+        mapEl[event].length = 0;
+        clean(events, el, event);
+        return events;
+      }
+      const foundCbIndex = mapEl[event].findIndex((fn) => areEqualFns(fn, cb));
+
+      if (foundCbIndex !== "undefined") {
+        removeHandler.call(el, event, mapEl[event][foundCbIndex]);
+        mapEl[event] = [
+          ...mapEl[event].slice(0, foundCbIndex),
+          ...mapEl[event].slice(foundCbIndex + 1),
+        ];
+      }
+      clean(events, el, event);
+      return events;
     }
     return events;
-  }
+  };
 }

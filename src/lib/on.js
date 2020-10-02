@@ -1,21 +1,29 @@
-//IE8 and lower compatible (useless but rewarding)
+import { has, get, set } from "./utils.js";
 
-const addHandler = function addHandler (...args) {
-  return ('addEventListener' in this) ? this.addEventListener(...args, 0) : this.attachEvent(...args);
-};
+function addHandler(...args) {
+  "addEventListener" in this
+    ? this.addEventListener(...args, 0)
+    : this.attachEvent(...args);
+  return args.pop();
+}
 
-module.exports = function (events) {
-  return function on (...args) {
-    const findElement = events.filter(handler => handler.el === this);
-    if (findElement.length) { //the element already exists
-      const findEvent = events.find(handler => handler.event === args[0] && handler.el === this);
-      if (typeof findEvent !== 'undefined') { //the element has already this event registered
-        findEvent.func.push(args[1]);
-        addHandler.call(this, ...args);
-      }
+export default function on(events) {
+  return function on(el, event, cb) {
+    if (!el || !event || !cb) {
+      return events;
     }
-    events.push({ el: this, event: args[0], func: [args[1]] });
-    addHandler.call(this, ...args);
+    if (has(events, el)) {
+      const mapEl = get(events, el);
+      let eventHandlers = mapEl[event];
+      if (eventHandlers) {
+        eventHandlers.push(addHandler.call(el, event, cb));
+      } else {
+        eventHandlers = [addHandler.call(el, event, cb)];
+        mapEl[event] = eventHandlers;
+      }
+    } else {
+      set(events, el, { [event]: [addHandler.call(el, event, cb)] });
+    }
     return events;
-  }
+  };
 }

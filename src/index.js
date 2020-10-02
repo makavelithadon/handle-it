@@ -1,10 +1,7 @@
-(() => {
+import onFn from "./lib/on.js";
+import offFn from "./lib/off.js";
 
-  const events = [];
-  const on = require('./lib/on')(events)
-  const off = require('./lib/off')(events)
+const events = new Map();
 
-  Element.prototype.on = on;
-  Element.prototype.off = off;
-
-})();
+export const on = onFn(events);
+export const off = offFn(events);
