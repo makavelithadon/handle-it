@@ -2,7 +2,8 @@
   "name": "handle-it",
   "version": "1.0.3",
   "description": "An event-handler module to easily handle events on elements",
-  "main": "dist/index.min.js",
+  "main": "src/index.js",
+  "module": "src/index.js",
   "unpkg": "dist/index.min.js",
   "scripts": {
     "watch": "cross-env NODE_ENV=development webpack --watch",
@@ -22,12 +23,15 @@
     "babel-loader": "^8.1.0",
     "cross-env": "^7.0.2",
     "jest": "^26.4.2",
-    "uglify-js": "^3.11.0",
     "webpack": "^4.44.2",
     "webpack-bundle-analyzer": "^3.9.0",
     "webpack-cli": "^3.3.12"
   },
   "dependencies": {
-    "core-js": "^3.6.5"
+    "core-js": "^3.6.5",
+    "terser-webpack-plugin": "^4.2.2"
+  },
+  "resolution": {
+    "terser": "3.17.0"
   }
 }

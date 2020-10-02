@@ -16,17 +16,17 @@ require('handle-it');
 
 or with es6 module syntax
 
-```
-import 'handle-it';
+```javascript
+import { on, off } from "handle-it";
 ```
 
 #### with requiring minified script
 
-```
+```html
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title></title>
   </head>
   <body>
@@ -39,31 +39,31 @@ import 'handle-it';
 
 #### Add an event on DOM element
 
-```
-var myElement = document.getElementById('myID');
+```javascript
+const myElement = document.getElementById("myID");
 
-var myFunc = function () {
+const myFunc = function () {
   //do something
 };
 
-myElement.on('click', myFunc);
+on(myElement, "click", myFunc);
 ```
 
 #### Remove an event
 
-```
+```javascript
 //remove all eventhandlers on myElement with specific event
 
-myElement.off('click');
+off(myElement, "click");
 
 //or remove only a specific function
 
-myElement.off('click', myFunc);
+off(myElement, "click", myFunc);
 ```
 
 ## Authors
 
-* **makavelithadon** - *Initial work* - [makavelithadon](https://github.com/makavelithadon)
+- **makavelithadon** - _Initial work_ - [makavelithadon](https://github.com/makavelithadon)
 
 ## License
 

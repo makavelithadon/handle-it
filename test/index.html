@@ -7,18 +7,20 @@
   </head>
   <body>
     <button class="btn btn-say-hello">Say Hello</button>
+    <!-- CDN way -->
+    <script src="./../dist/index.min.js"></script>
+    <script>
+      const btn = document.querySelector(".btn-say-hello");
+      handleIt.on(btn, "click", () => {
+        alert("hello");
+        handleIt.off(btn);
+      });
+    </script>
+    <!-- esModules way -->
     <script type="module">
       import { on, off } from "./../src/index.js";
 
-      const btn = document.querySelector(".btn.btn-say-hello");
-
-      const onClick = () => console.log("click.");
-      const onMouseDown = () => console.log("mousedown.");
-
-      on(btn, "click", onClick);
-      on(btn, "mousedown", onMouseDown);
-
-      window.setTimeout(() => off(btn), 5000);
+      console.log({ on, off });
     </script>
   </body>
 </html>
