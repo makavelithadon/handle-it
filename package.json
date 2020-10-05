@@ -1,8 +1,8 @@
 {
   "name": "handle-it",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "An event-handler module to easily handle events on elements",
-  "main": "src/index.js",
+  "main": "dist/index.min.js",
   "module": "src/index.js",
   "unpkg": "dist/index.min.js",
   "scripts": {
