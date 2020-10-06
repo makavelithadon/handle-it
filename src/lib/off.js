@@ -11,19 +11,20 @@ function areEqualFns(fn1, fn2) {
   return fn1 === fn2 || fn1.toString() === fn2.toString();
 }
 
+function clean(map, el, event) {
+  const mapEl = get(map, el);
+  if (mapEl) {
+    if (mapEl[event] && mapEl[event].filter(Boolean).length <= 0) {
+      delete mapEl[event];
+    }
+    if (Object.keys(mapEl).length <= 0) {
+      del(map, el);
+    }
+  }
+}
+
 export default function off(events) {
   return function off(el, event, cb) {
-    const clean = (map, el, event) => {
-      const mapEl = get(map, el);
-      if (mapEl) {
-        if (mapEl[event] && mapEl[event].filter(Boolean).length <= 0) {
-          delete mapEl[event];
-        }
-        if (Object.keys(mapEl).length <= 0) {
-          del(map, el);
-        }
-      }
-    };
     if (has(events, el)) {
       const mapEl = get(events, el);
       if (!event) {
@@ -42,7 +43,7 @@ export default function off(events) {
       }
       const foundCbIndex = mapEl[event].findIndex((fn) => areEqualFns(fn, cb));
 
-      if (foundCbIndex !== "undefined") {
+      if (foundCbIndex !== -1) {
         removeHandler.call(el, event, mapEl[event][foundCbIndex]);
         mapEl[event] = [
           ...mapEl[event].slice(0, foundCbIndex),
