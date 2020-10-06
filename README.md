@@ -4,14 +4,20 @@ An event-handler module to easily handle events on elements
 
 ## Getting Started
 
-#### with NPM
+#### Install
 
-```
-$ npm i -D handle-it
+```shell
+npm i -S handle-it
 ```
 
+or
+
+```shell
+yarn add handle-it -S
 ```
-require('handle-it');
+
+```javascript
+require("handle-it");
 ```
 
 or with es6 module syntax
@@ -52,14 +58,39 @@ on(myElement, "click", myFunc);
 #### Remove an event
 
 ```javascript
-//remove all eventhandlers on myElement with specific event
+// remove only a specific function
+
+off(myElement, "click", myFunc); // A stric equality on fn reference and toString method is used here.
+
+// remove all eventhandlers on myElement with specific event
 
 off(myElement, "click");
 
-//or remove only a specific function
+// or event remove all registered events for a specific DOM element
 
-off(myElement, "click", myFunc);
+off(myElement);
 ```
+
+## Debug
+
+`on` or `off` functions always return the stored/registered handlers
+
+```javascript
+const h = on(document.body, 'click', () => console.log('click on body element.')));
+console.log(h); // Map(1) {body => "click"}
+```
+
+## Development
+
+clone the repo
+
+#### install deps by `yarn` / `npm i`
+
+#### exec `yarn dev` / `npm run dev`
+
+#### exec a dev server of your choice to run `/test/index.html` (I'm using the Live Server ext on vscode)
+
+#### exec the `yarn test` or `npm run test` script
 
 ## Authors
 
