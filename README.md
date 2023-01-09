@@ -2,7 +2,7 @@
 
 ![handle-it logo](./image/logo.svg)
 
-[![codecov](https://codecov.io/gh/makavelithadon/handle-it/branch/feature/library-deep-rework/graph/badge.svg?token=MJIA1VRWJY)](https://codecov.io/gh/makavelithadon/handle-it)
+[![codecov](https://codecov.io/gh/makavelithadon/handle-it/branch/feature/master/graph/badge.svg?token=MJIA1VRWJY)](https://codecov.io/gh/makavelithadon/handle-it)
 [![gzip](https://badgen.net/bundlephobia/minzip/handle-it)](https://badgen.net/bundlephobia/minzip/handle-it)
 [![npm version](https://badgen.net/npm/v/handle-it)](https://badgen.net/npm/v/handle-it)
 [![license](https://badgen.net/npm/license/handle-it)](https://badgen.net/npm/license/handle-it)
