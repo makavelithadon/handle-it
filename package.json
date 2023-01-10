@@ -18,6 +18,7 @@
     "LICENSE"
   ],
   "author": "Romuald Duconseil <rduconseil.pro@gmail.com> https://rduconseil.dev",
+  "license": "MIT",
   "private": false,
   "repository": {
     "type": "git",
